@@ -11,8 +11,8 @@ public class Main {
         MultServlet multServlet = new MultServlet();
 
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
-        context.addServlet(new ServletHolder(mainServlet), "/");
         context.addServlet(new ServletHolder(multServlet), "/mult");
+        context.addServlet(new ServletHolder(mainServlet), "/");
 
         Server server = new Server(8080);
         server.setHandler(context);
