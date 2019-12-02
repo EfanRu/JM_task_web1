@@ -11,12 +11,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MultServlet extends HttpServlet {
-
     public void doGet(HttpServletRequest request,
           HttpServletResponse response) throws ServletException, IOException {
-        System.out.println(request.getParameter("Value"));
-        response.getWriter().println(request.getParameter("Value"));
+
+        int valueInt;
+        try {
+            valueInt = 2 * Integer.parseInt(request.getParameter("value"));
+            response.setStatus(HttpServletResponse.SC_OK);
+        } catch (NumberFormatException | NullPointerException e) {
+            valueInt = 0;
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+        }
+
+        response.getWriter().println(valueInt);
         response.setContentType("text/html;charset=utf-8");
-        response.setStatus(HttpServletResponse.SC_OK);
     }
 }

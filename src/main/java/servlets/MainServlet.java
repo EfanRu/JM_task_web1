@@ -18,18 +18,6 @@ import java.util.Map;
         Map<String, Object> pageVariables = createPageVariablesMap(request);
         pageVariables.put("message", "");
 
-        int valueInt;
-        try {
-            String valueStr = request.getParameterMap().get("value")[0];
-            valueInt = Integer.parseInt(valueStr);
-            valueInt *= 2;
-            response.setStatus(HttpServletResponse.SC_OK);
-        } catch (NumberFormatException | NullPointerException e) {
-            valueInt = 0;
-            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-        }
-        pageVariables.put("Value", valueInt);
-
         response.getWriter().println(new PageGenerator().getPage("page.html", pageVariables));
 
         response.setContentType("text/html;charset=utf-8");
